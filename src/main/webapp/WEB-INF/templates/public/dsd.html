@@ -1,0 +1,183 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="public/fragments :: html_head">
+
+</head>
+<body id="top">
+
+<div id="overlayer"></div>
+<div class="loader">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div th:if="${confirm_account}" class="toast" data-delay="2000" style="position:fixed; top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+  <div class="toast-header" style="background-color: #1c7430">
+    <strong class="mr-auto" style="color: white">Thông báo</strong>
+    <small style="color: white">Vừa xong</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true" style="color: white">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body" >
+    <p th:text="'✅ ' +${confirm_account}"></p>
+  </div>
+  <script>
+    $(document).ready(function(){
+      $('.toast').toast('show');
+    });
+  </script>
+</div>
+<div  class="toast" data-delay="2000" style="position:fixed; top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+  <div class="toast-header" style="background-color: #1c7430">
+    <strong class="mr-auto" style="color: white">Thông báo</strong>
+    <small style="color: white">Vừa xong</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true" style="color: white">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body" >
+    <p >✅ Cập nhật ảnh đại diện thành công</p>
+  </div>
+</div>
+<div  class="toast" data-delay="2000" style="position:fixed; top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+  <div class="toast-header" id="change" style="background-color: #1c7430">
+    <strong class="mr-auto" style="color: white">Thông báo</strong>
+    <small style="color: white">Vừa xong</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true" style="color: white">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body" >
+    <p id="text" >✅ Cập nhật ảnh đại diện thành công</p>
+  </div>
+</div>
+<div th:if="${success}" class="toast" id="toast" data-delay="2000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+  <div class="toast-header" style="background-color: #1c7430">
+    <strong class="mr-auto" style="color: white">Thông báo</strong>
+    <small style="color: white">Vừa xong</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true" style="color: white">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body" >
+    <p th:text="'✅ ' +${success}"></p>
+  </div>
+  <script>
+    $(document).ready(function(){
+      $('#toast').toast('show');
+    });
+  </script>
+</div>
+
+<div class="site-wrap">
+
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-close2 js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div> <!-- .site-mobile-menu -->
+
+
+  <!-- NAVBAR -->
+  <header th:replace="public/fragments :: header_menu" class="site-navbar mt-3">
+
+  </header>
+
+  <!-- HOME -->
+  <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="text-white font-weight-bold">Post A Job</h1>
+          <div class="custom-breadcrumbs">
+            <a href="#">Home</a> <span class="mx-2 slash">/</span>
+            <a href="#">Job</a> <span class="mx-2 slash">/</span>
+            <span class="text-white"><strong>Post a Job</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section th:if="${userInformation.status == 0 }" class="site-section" style="margin-top: 10px">
+
+
+    <div class="container">
+      <form action="/user/uploadCv" method="post" enctype="multipart/form-data">
+        <div class="row align-items-center mb-5">
+
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-6">
+                <button type="submit" id="myBtn" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Cập nhật cv</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <form action="/user/update-profile" method="post" >
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-8 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <div>
+                <h2>Cập nhật thông tin</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row">
+
+              <div class="col-6">
+                <button type="submit" class="btn btn-block btn-primary btn-md">Lưu thông tin</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-lg-12">
+            <div class="p-4 p-md-5 border rounded" method="post">
+              <h3 class="text-black mb-5 border-bottom pb-2">Thông tin chi tiết</h3>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <p th:text="${userInformation.email}"></p>
+                <input type="hidden" class="form-control" style="" id="email" name="email" th:value="${userInformation.email}" placeholder="you@yourdomain.com">
+              </div>
+              <div class="form-group">
+                <label for="job-title">Full name</label>
+                <input type="text" class="form-control" name="fullName" th:value="${userInformation.fullName}" id="job-title" placeholder="Full name">
+              </div>
+              <div class="form-group">
+                <label for="job-location">Địa chỉ</label>
+                <input type="text"  name="address" th:value="${userInformation.address != null ? userInformation.address : null}" class="form-control" id="job-location" placeholder="e.g. New York">
+              </div>
+              <div class="form-group">
+                <label for="job-location">Số điện thoại</label>
+                <input type="text" name="phoneNumber" th:value="${userInformation.phoneNumber != null ? userInformation.phoneNumber : null}" class="form-control" id="job-location" placeholder="+ 84">
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer th:replace="public/fragments :: footer" class="site-footer">
+
+  </footer>
+
+</div>
+
+</body>
+</html>

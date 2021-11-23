@@ -22,8 +22,12 @@ public class Items {
     private String name;
 
     @Column(name = "price")
-    private float price;
+    private int price;
 
     @OneToMany(mappedBy = "items")
     private List<BookingItems> bookingItemsList;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private CategoryItems categoryItems;
 }

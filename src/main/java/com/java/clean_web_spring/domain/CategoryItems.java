@@ -25,8 +25,11 @@ public class CategoryItems {
     private String description;
 
     @Column(name = "price")
-    private float price;
+    private int price;
 
     @OneToMany(mappedBy = "categoryItems")
     private List<Booking> bookings;
+
+    @OneToMany(mappedBy = "categoryItems")
+    private List<Items> itemsList;
 }

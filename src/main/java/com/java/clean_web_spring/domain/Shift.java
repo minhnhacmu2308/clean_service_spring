@@ -22,7 +22,7 @@ public class Shift {
     private String name;
 
     @Column(name = "price")
-    private float price;
+    private int price;
 
     @OneToMany(mappedBy = "shift")
     private List<Booking> bookings;

@@ -31,7 +31,7 @@ public class Booking {
     private CategoryItems categoryItems;
 
     @Column(name = "amount")
-    private float amount;
+    private int amount;
 
     @OneToMany(mappedBy = "booking")
     private List<BookingItems> bookingItemss;
