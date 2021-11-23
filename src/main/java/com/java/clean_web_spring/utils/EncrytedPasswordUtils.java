@@ -1,22 +1,12 @@
 package com.java.clean_web_spring.utils;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class EncrytedPasswordUtils {
-    public static String encrytePassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder.encode(password);
-    }
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
+
     public String md5(String password) {
         String result = "";
         MessageDigest digest;
@@ -31,9 +21,6 @@ public class EncrytedPasswordUtils {
         return result;
     }
     public static void main(String[] args) {
-        String password = "123";
-        String encrytedPassword = encrytePassword(password);
 
-        System.out.println("Encryted Password: " + encrytedPassword);
     }
 }
