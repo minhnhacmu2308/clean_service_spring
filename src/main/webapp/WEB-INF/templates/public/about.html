@@ -1,0 +1,122 @@
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="public/fragments :: html_head">
+
+</head>
+<body id="top">
+
+<div id="overlayer"></div>
+<div class="loader">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+
+<div class="site-wrap">
+
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-close2 js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div> <!-- .site-mobile-menu -->
+
+
+  <!-- NAVBAR -->
+  <header th:replace="public/fragments :: header_menu" class="site-navbar mt-3">
+
+  </header>
+  <div th:if="${msg_register_success}" class="toast" data-delay="2000" style="position:fixed;top: 100PX; left: 10PX;z-index: 2000;width: 300px">
+    <div class="toast-header" style="background-color: #1c7430">
+      <strong class="mr-auto" style="color: white">Thông báo</strong>
+      <small style="color: white">Vừa xong</small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true" style="color: white">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body" >
+      <p th:text="'✅ ' +${msg_register_success}"></p>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $('.toast').toast('show');
+      });
+    </script>
+  </div>
+  <!-- HOME -->
+  <section class="home-section section-hero overlay bg-image" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190628/ourmid/pngtree-sanitation-workers--day-psd-background-material-image_279853.jpg');" id="home-section">
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-7" style="margin-top: 375px;margin-left: 260px;text-align: center !important;">
+          <h1 class="text-white font-weight-bold" >About Us</h1>
+          <div class="custom-breadcrumbs">
+            <a href="#">Home</a> <span class="mx-2 slash">/</span>
+            <span class="text-white"><strong>About Us</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="site-section pb-0">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <a data-fancybox data-ratio="2" href="https://vimeo.com/317571768" class="block__96788">
+            <span class="play-icon"><span class="icon-play"></span></span>
+            <img src="images/sq_img_6.jpg" alt="Image" class="img-fluid img-shadow">
+          </a>
+        </div>
+        <div class="col-lg-5 ml-auto">
+          <h2 class="section-title mb-3">Who We Are</h2>
+          <p class="lead">We are Mr Guru, a local professional cleaning service provider in Canberra, ACT 2600. We offer affordable, reliable and flexible cleaning services to make your life easier. Our services include Regular House Cleaning, Commercial Cleaning, Deep Spring Cleaning, Steam Carpet Cleaning, End of Lease Cleaning, Windows Cleaning, Tile & Grouts Cleaning, Post Construction Cleaning and more. We use speciality environmental-friendly cleaning products and equipment for all our general services. We can also use allergy free micro-fibre cloths for chemical-free cleaning if required, just for that added personal touch. Let us take care of all your cleaning needs so that you can enjoy life with more quality time to relax, socialise and entertain.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-section pt-0">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0 order-md-2">
+          <a data-fancybox data-ratio="2" href="https://vimeo.com/317571768" class="block__96788">
+            <span class="play-icon"><span class="icon-play"></span></span>
+            <img src="images/sq_img_8.jpg" alt="Image" class="img-fluid img-shadow">
+          </a>
+        </div>
+        <div class="col-lg-5 mr-auto order-md-1  mb-5 mb-lg-0">
+          <h2 class="section-title mb-3">SOMETHING ABOUT US!</h2>
+          <p class="lead">Blue Cleaning Group Ltd Pty is a Canberra based cleaning company founded by Melody Rodriguez.
+
+            Melody decided to start Blue Cleaning Group Ltd Pty after seeing a demand in Canberra for simple, quality, reliable and trustworthy cleaning on Residential, Industrial and commercial levels
+
+            Cleaning should not be difficult, you should be able to entrust your home or business or building project to somebody and return to find everything you expect to be clean, cleaned! And this is exactly what we provide, a no fuss, reliable and trustworthy cleaning services.
+
+            We would like to hear from you. We encourage you to contact one of our friendly customer service on 02 61300 966 to discuss your cleaning needs and how we can deliver value to your business.
+
+            Melody Rodriguez
+
+            Director</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <footer th:replace="public/fragments :: footer"  class="site-footer">
+
+  </footer>
+
+</div>
+
+
+</body>
+</html>

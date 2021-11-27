@@ -27,4 +27,9 @@ public class CategoryItemsServiceImpl implements CategoryItemsService {
     public List<CategoryItems> findAll() {
         return categoryItemsRepository.findAll();
     }
+
+    @Override
+    public CategoryItems findCategoryItemsById(int id) {
+        return categoryItemsRepository.findCategoryItemsById(id);
+    }
 }

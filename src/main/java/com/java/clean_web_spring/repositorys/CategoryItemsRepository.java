@@ -13,4 +13,6 @@ public interface CategoryItemsRepository extends PagingAndSortingRepository<Cate
     Page<CategoryItems> findAll(Pageable pageable);
 
     List<CategoryItems> findAll();
+
+    CategoryItems findCategoryItemsById(int id);
 }

@@ -1,0 +1,10 @@
+đề tài của em là lập trình website cung cấp dịch vụ vệ sinh. mình bảo vệ theo đợt thì đợt 1 có 1 số yêu cầu như sau:
+Xây dựng web file cung cấp dịch vụ vệ sinh cho một công ty nào đó. Khi đó chức năng sẽ bao gồm như:
+- Giới thiệu công ty; 
+- các dịch vụ cung cấp; 
+- bảng giá,
+- quote giá (người dùng sẽ nhập các thông tin về dịch vụ mình muốn, sau đó website sẽ đưa ra giá dự tính dựa trên bảng giá, sau đó lưu thông tin khách hàng để có thể email hoặc gọi điện lại trao đổi với khách hàng
+- Review/đánh giá
+Có thể tham khảo một số website sau:
+https://mrguru.com.au/
+https://bluecleaningroup.com.au/

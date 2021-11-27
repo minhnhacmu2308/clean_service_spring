@@ -14,4 +14,6 @@ public interface CategoryItemsService {
     Page<CategoryItems> findAll(Pageable pageable);
 
     List<CategoryItems> findAll();
+
+    CategoryItems findCategoryItemsById(int id);
 }
