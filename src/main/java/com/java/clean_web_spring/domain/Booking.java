@@ -38,4 +38,16 @@ public class Booking {
 
     @Column(name = "created")
     private String createdAt;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "full_name")
+    private String fullName;
 }

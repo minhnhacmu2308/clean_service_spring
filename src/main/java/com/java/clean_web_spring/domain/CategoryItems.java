@@ -32,4 +32,7 @@ public class CategoryItems {
 
     @OneToMany(mappedBy = "categoryItems")
     private List<Items> itemsList;
+
+    @OneToMany(mappedBy = "categoryItems")
+    private List<Review> reviews;
 }
