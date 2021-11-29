@@ -8,3 +8,23 @@ Xây dựng web file cung cấp dịch vụ vệ sinh cho một công ty nào đ
 Có thể tham khảo một số website sau:
 https://mrguru.com.au/
 https://bluecleaningroup.com.au/
+------------------
+Người dùng :
+Đăng ký
+Đăng nhập
+Xem giới thiệu cty
+Xem các dịch vụ cung cấp + giá tiền
+Review dịch vụ
+Booking dịch vụ (chọn dịch vụ, chọn thời gian,chọn các dịch vụ đi kèm -> hệ thống tự động tính tổng giá tiền)
+Xem được lịch sử booking
+Admin :
+Đăng nhập
+Thống kê số lượng và doanh thu
+Quản lý dịch vụ
+Quản lý dịch vụ đi kèm
+Quản lý Thời gian
+Quản lý Khách hàng
+Quản lý Booking
+Quản lý Review khách hàng
+----
+Thêm ảnh ở dịch vụ

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html  lang="en">
+
+<head th:replace="admin/fragments :: html_head">
+</head>
+
+<body class="sb-nav-fixed">
+<nav th:replace="admin/fragments :: html_nav" class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+
+</nav>
+
+<div id="layoutSidenav">
+  <div th:replace="admin/fragments :: html_menu" id="layoutSidenav_nav">
+
+  </div>
+
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Danh sách Booking</h1>
+        <div class="card mb-4">
+          <div class="card-header">
+            <div th:if="${msg}" class="alert alert-success">
+              <strong>Thành công!</strong>
+            </div>
+          </div>
+          <div class="card-body">
+            <table id="datatablesSimple">
+              <thead>
+              <tr style="background-color: gray !important;">
+                <th>STT</th>
+                <th>Khách hàng</th>
+                <th>Dịch vụ</th>
+                <th>Thời gian</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+              </tr>
+              </thead>
+              <tfoot>
+              <tr>
+                <th>STT</th>
+                <th>Khách hàng</th>
+                <th>Dịch vụ</th>
+                <th>Thời gian</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+              </tr>
+              </tfoot>
+              <tbody>
+              <input type="hidden" th:value="${list.size()}" id="dodai" />
+              <th:block th:each="category : ${list}">
+                <tr>
+                  <td th:text="${category.id}"></td>
+                  <td th:text="${category.fullName}"></td>
+                  <td th:text="${category.categoryItems.name}"></td>
+                  <td th:text="${category.shift.name} + ' ngày ' + ${category.startDate}"></td>
+                  <td th:text="${category.amount} + ' VND'"></td>
+                  <td th:if="${category.status == 0}" th:text="'Chưa thanh toán'"></td>
+                  <td th:unless="${category.status == 0}" th:text="'Đã thanh toán'"></td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                            th:data-bs-target="'#exampleModalD'+${category.id}">
+                      Chi tiết
+                    </button>
+                    <button th:if="${category.status == 0}" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            th:data-bs-target="'#exampleModal'+${category.id}">
+                      Cập nhập
+                    </button>
+                  </td>
+                </tr>
+                <!--Detail-->
+                <div class="modal fade" th:id="'exampleModalD'+${category.id}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Chi tiết</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+
+                        <div class="row">
+                          <div class="col-6">
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 110px">Họ tên</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.fullName}"></span>
+                            </div>
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 110px">Số điện thoại</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.phoneNumber}"></span>
+                            </div>
+
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 110px">Email</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.email}"></span>
+                            </div>
+
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 110px">Địa chỉ</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.address}"></span>
+                            </div>
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 110px">Ngày Booking</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.createdAt}"></span>
+                            </div>
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;"> Danh sách dịch vụ đi kèm </label>
+                              <strong>:</strong><br>
+                              <th:block th:each="categorys : ${category.categoryItems.itemsList}">
+                                <span th:text="${categorys.name}"></span><br>
+                              </th:block>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 150px">Dịch vụ</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.categoryItems.name}"></span>
+                            </div>
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 150px">Thời gian</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.shift.name}"></span>
+                            </div>
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 150px">Ngày thực hiện</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.startDate}"></span>
+                            </div>
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 150px">Tổng tiền</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:text="${category.amount} + ' VND'"></span>
+                            </div>
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 150px">Trạng thái:</label>
+                              <strong>:</strong>&emsp;&emsp;<span th:if="${category.status == 0}" th:text="'Chưa thanh toán'"></span>
+                              <span th:unless="${category.status == 0}" th:text="'Đã thanh toán'"></span>
+                            </div>
+                            <div class="">
+                              <label for="category-film"
+                                     class="col-form-label" style="font-weight:bold;width : 150px">Message</label>
+                              <strong>:</strong><br><span th:utext="${category.message}"></span>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal Update-->
+                <div class="modal fade" th:id="'exampleModal'+${category.id}" tabindex="-1"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog ">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabell">Cập nhập</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form enctype="multipart/form-data" th:action="@{/admin/booking-update}" method="post">
+                          <input type="hidden" th:value="${category.id}" name="id">
+                          <div class="">
+                            <label for="ct_id"
+                                   class="col-form-label">Cập nhập trạng thái:</label>
+                            <select class="form-control" id="ct_id" name="status" required>
+                              <option value="" selected>Chọn trạng thái</option>
+                              <option value="0" >Chưa thanh toán</option>
+                              <option value="1" >Đã thanh toán</option>
+                            </select>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </form>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal Update-->
+
+              </th:block>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <script>
+
+      ClassicEditor.create(document.querySelector('#editor')).then(eidt => {
+        console.log("da" + eidt);
+      })
+              .catch(error => {
+                console.error(error);
+              });
+
+    </script>
+    <script>
+
+      var dodai = document.getElementById("dodai").value;
+      var a = parseInt(dodai);
+      for(var i = 1;i<=a+10;i++){
+        var name = "#editor"  + i
+        ClassicEditor.create(document.querySelector(name)).then(eidt => {
+          console.log("da" + eidt);
+        })
+                .catch(error => {
+                  console.error(error);
+                });
+      }
+
+
+    </script>
+    <footer th:replace="admin/fragments :: footer" class="py-4 bg-light mt-auto">
+
+    </footer>
+  </div>
+</div>
+
+<script src="js/JQuery3.3.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="js/datatables-simple-demo.js"></script>
+</body>
+
+</html>

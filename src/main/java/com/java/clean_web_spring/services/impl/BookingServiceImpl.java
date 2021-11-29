@@ -1,6 +1,7 @@
 package com.java.clean_web_spring.services.impl;
 
 import com.java.clean_web_spring.domain.Booking;
+import com.java.clean_web_spring.domain.Review;
 import com.java.clean_web_spring.domain.User;
 import com.java.clean_web_spring.repositorys.Bookingrepository;
 import com.java.clean_web_spring.services.BookingService;
@@ -28,5 +29,15 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> getBookingById(User user,int status) {
         return bookingrepository.findBookingByUserAndStatus(user,status);
+    }
+
+    @Override
+    public List<Booking> findAll() {
+        return bookingrepository.findAll();
+    }
+
+    @Override
+    public int update(int status, int id) {
+        return bookingrepository.update(status,id);
     }
 }

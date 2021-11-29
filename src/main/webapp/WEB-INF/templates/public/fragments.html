@@ -94,7 +94,7 @@
 <!--              </ul>-->
 <!--            </li>-->
             <li><a href="/service/">Service</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <!--<li><a href="contact.html">Contact</a></li>-->
             <li th:if="${session.user}" class="d-lg-none"><a href="post-job.html"><span class="mr-2" th:text="${session.user.fullName}"></span> </a></li>
             <li class="d-lg-none" th:if="${session.user}"><a href="/user/logout" >Logout</a></li>
             <li class="d-lg-none" th:unless="${session.user}"><a href="/user/login">Log In</a></li>
