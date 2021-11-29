@@ -1,0 +1,149 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="public/fragments :: html_head">
+
+</head>
+<body id="top">
+
+<div id="overlayer"></div>
+<div class="loader">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div th:if="${success}" class="toast" id="toast" data-delay="2500" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+  <div class="toast-header" style="background-color: #1c7430">
+    <strong class="mr-auto" style="color: white">Notice</strong>
+    <small style="color: white">Just now</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true" style="color: white">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body" >
+    <p th:text="'✅ ' +${success}"></p>
+  </div>
+  <script>
+    $(document).ready(function(){
+      $('#toast').toast('show');
+    });
+  </script>
+</div>
+
+<div class="site-wrap">
+
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-close2 js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div> <!-- .site-mobile-menu -->
+
+
+  <!-- NAVBAR -->
+  <header th:replace="public/fragments :: header_menu" class="site-navbar mt-3">
+
+  </header>
+  <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="text-white font-weight-bold">Detail Booking</h1>
+          <div class="custom-breadcrumbs">
+            <a href="/">Home</a> <span class="mx-2 slash">/</span>
+            <a href="/service/">Booking</a> <span class="mx-2 slash">/</span>
+            <span class="text-white"><strong>Detail Booking</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="site-section">
+    <div class="container">
+
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-7 text-center">
+          <h2 th:if="${status == 0}" class="section-title mb-2" >Chưa thanh toán</h2>
+          <h2 th:unless="${status == 0}" class="section-title mb-2" >Đã thanh toán</h2>
+        </div>
+      </div>
+
+      <ul class="job-listings mb-5">
+        <th:block th:if="${bookingList.size() > 0}" th:each="category : ${bookingList}">
+          <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+            <div th:if="${status == 1}" class="job-listing-logo">
+              <button type="button" data-bs-toggle="modal"
+                      th:data-bs-target="${'#exampleModalAdd'}+${category.id} " class="btn btn-primary py-2" style="margin: 15px 30px ;">Review</button>
+            </div>
+            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+              <div class="job-listing-position custom-width  mb-3 mb-sm-0" style="padding: 10px;width: 250px">
+                <h2 th:onclick="'detailCategory(' +${category.categoryItems.id}+ ')'" th:text="${category.categoryItems.name}"></h2>
+                <th:block th:if="${category.categoryItems.itemsList.size() > 0}" th:each="items : ${category.categoryItems.itemsList}">
+                  <strong th:text="${items.name}"></strong><br>
+                </th:block>
+              </div>
+              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-20" style="padding: 10px;">
+                Thời gian<br>
+                <strong th:text="${category.shift.name}"></strong><br>
+                Ngày<br>
+                <strong th:text="${category.startDate}">2021-11-29</strong>
+              </div>
+              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-20" style="padding: 30px;">
+                Tổng tiền<br>
+                <strong th:text="${category.amount}+${' VNĐ'}"></strong>
+              </div>
+              <div class="job-listing-meta" style="padding: 40px;">
+                <span th:if="${category.status == 0}" class="badge badge-danger">Chưa thanh toán</span>
+                <span th:unless="${category.status == 0}" class="badge badge-success">Đã thanh toán</span>
+              </div>
+            </div>
+          </li>
+          <!-- Modal Add-->
+          <div style="z-index: 2000;border: 2px solid #90c317;border-radius: 5px !important;" class="modal fade" th:id="${'exampleModalAdd'}+${category.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+               aria-hidden="true">
+            <div class="modal-dialog " style="border: 1px solid #90c317">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelll" th:text="${'Review servie '}+${category.categoryItems.name}"></h5>
+
+                </div>
+                <div class="modal-body">
+                  <form method="post" th:action="${'/user/review/'}+${category.categoryItems.id}">
+                    <div class="form-group">
+                      <label for="message">Review</label>
+                      <textarea name="comment"  id="message" cols="30"  rows="10" class="form-control"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save </button>
+                    </div>
+                  </form>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </th:block>
+      </ul>
+      <script>
+        function detailCategory(id){
+          window.location = '/service/detail/' + id;
+        }
+      </script>
+
+    </div>
+  </section>
+  <footer th:replace="public/fragments :: footer" class="site-footer">
+
+  </footer>
+
+</div>
+
+</body>
+</html>

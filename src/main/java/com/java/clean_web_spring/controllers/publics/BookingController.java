@@ -3,6 +3,7 @@ package com.java.clean_web_spring.controllers.publics;
 import com.java.clean_web_spring.Constants.CommonConstants;
 import com.java.clean_web_spring.domain.*;
 import com.java.clean_web_spring.services.*;
+import com.java.clean_web_spring.utils.Middleware;
 import com.java.clean_web_spring.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -145,11 +146,20 @@ public class BookingController {
     }
 
     @GetMapping("/list/{status}/{userId}")
-    public ModelAndView listBooking(@PathVariable int status,@PathVariable int userId){
+    public ModelAndView listBooking(@PathVariable int status,@PathVariable int userId,
+                                    HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
-        User user = userService.getUserById(userId);
-        List<Booking> bookingList = bookingService.getBookingById(user,status);
-        mv.addObject("bookingList",bookingList);
+        boolean auth = Middleware.middleware(request);
+        if (auth) {
+            mv = new ModelAndView("public/list-booking");
+            User user = userService.getUserById(userId);
+            List<Booking> bookingList = bookingService.getBookingById(user,status);
+            mv.addObject("bookingList",bookingList);
+            mv.addObject("status",status);
+        } else {
+            mv = new ModelAndView("redirect:/user/login");
+        }
+
         return mv;
     }
 

@@ -1,5 +1,6 @@
 package com.java.clean_web_spring.services.impl;
 
+import com.java.clean_web_spring.domain.CategoryItems;
 import com.java.clean_web_spring.domain.Review;
 import com.java.clean_web_spring.domain.Shift;
 import com.java.clean_web_spring.repositorys.ReviewRepository;
@@ -20,6 +21,16 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> findAll() {
         return reviewRepository.findAll();
+    }
+
+    @Override
+    public List<Review> findByCategoryItems(CategoryItems categoryItems) {
+        return reviewRepository.findByCategoryItems(categoryItems);
+    }
+
+    @Override
+    public Review save(Review review) {
+        return reviewRepository.save(review);
     }
 
 }
