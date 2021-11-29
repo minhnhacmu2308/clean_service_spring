@@ -19,4 +19,24 @@ public class ItemsServiceImpl implements ItemsService {
     public List<Items> getListItemsByCategory(CategoryItems categoryItems) {
         return itemsRepository.findItemsByCategoryItems(categoryItems);
     }
+
+    @Override
+    public List<Items> findAll() {
+        return itemsRepository.findAll();
+    }
+
+    @Override
+    public Items save(Items items) {
+        return itemsRepository.save(items);
+    }
+
+    @Override
+    public int update(String name, int ct_id , int cost, int id) {
+        return itemsRepository.update(name,ct_id,cost,id);
+    }
+
+    @Override
+    public int delete(int id) {
+        return itemsRepository.delete(id);
+    }
 }

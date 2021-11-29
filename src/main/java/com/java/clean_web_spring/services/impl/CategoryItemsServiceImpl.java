@@ -32,4 +32,19 @@ public class CategoryItemsServiceImpl implements CategoryItemsService {
     public CategoryItems findCategoryItemsById(int id) {
         return categoryItemsRepository.findCategoryItemsById(id);
     }
+
+    @Override
+    public CategoryItems save(CategoryItems categoryItems) {
+        return categoryItemsRepository.save(categoryItems);
+    }
+
+    @Override
+    public int update(String name, String desciption , int cost, int id) {
+        return categoryItemsRepository.update(name,desciption,cost,id);
+    }
+
+    @Override
+    public int delete(int id) {
+        return categoryItemsRepository.delete(id);
+    }
 }

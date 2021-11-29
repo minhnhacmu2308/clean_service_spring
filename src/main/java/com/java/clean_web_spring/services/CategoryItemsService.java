@@ -16,4 +16,10 @@ public interface CategoryItemsService {
     List<CategoryItems> findAll();
 
     CategoryItems findCategoryItemsById(int id);
+
+    CategoryItems save(CategoryItems categoryItems);
+
+    int update(String name, String desciption , int cost, int id);
+
+    int delete(int id);
 }

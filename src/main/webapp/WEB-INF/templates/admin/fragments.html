@@ -32,20 +32,20 @@
 
     </form>
     <!-- Navbar-->
-    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false"><i class="fas fa-user fa-fw"></i><span ></span></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                <li>
-                    <hr class="dropdown-divider" />
-                </li>
-                <li><a class="dropdown-item" href="/logout">Logout</a></li>
-            </ul>
-        </li>
-    </ul>
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown1" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false"><i class="fas fa-user fa-fw"></i><span> Quản trị viên</span></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Activity Log</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
 </nav>
 <div  id="layoutSidenav">
     <div th:fragment="html_menu" id="layoutSidenav_nav">
@@ -53,43 +53,30 @@
             <div class="sb-sidenav-menu">
                 <div class="nav">
 
-                    <a class="nav-link" href="/home">
+                    <a class="nav-link" href="/admin/">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Bảng điều khiển
                     </a>
-                    <a class="nav-link" href="/admin/sanh-cuoi">
+                    <a class="nav-link" href="/admin/category">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Sảnh cưới
+                        Quản lý dịch vụ
                     </a>
-                    <a class="nav-link" href="/admin/dich-vu">
+                    <a class="nav-link" href="/admin/item">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Dịch vụ
-                    </a>
-                    <a class="nav-link" href="/admin/menu-food">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Menu thức ăn
-                    </a>
-                    <a class="nav-link" href="/admin/lien-he">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Phản hồi
+                        Dịch vụ đi kèm
                     </a>
                     <a class="nav-link" href="/admin/shift">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Ca tổ chức
+                        Thời gian
                     </a>
-                    <a class="nav-link" href="/admin/khach-hang">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Khách hàng
+                    <a class="nav-link" href="/admin/user">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Quản lý khách hàng
                     </a>
-                    <a class="nav-link" href="/admin/nhan-vien">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Nhân viên
+                    <a class="nav-link" href="/admin/shift">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Quản lý Booking
                     </a>
-                    <a class="nav-link" href="/employee/tiec-cuoi">
-                        <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                        Tiệc cưới
-                    </a>
-
                 </div>
             </div>
 
@@ -140,18 +127,11 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
         </main>
         <footer th:fragment="footer" class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
-                </div>
+
             </div>
         </footer>
     </div>
