@@ -39,4 +39,9 @@ public class ItemsServiceImpl implements ItemsService {
     public int delete(int id) {
         return itemsRepository.delete(id);
     }
+
+    @Override
+    public Items findItemsById(int id) {
+        return itemsRepository.findItemsById(id);
+    }
 }

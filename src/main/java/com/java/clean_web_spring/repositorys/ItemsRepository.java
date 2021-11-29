@@ -25,4 +25,6 @@ public interface ItemsRepository extends JpaRepository<Items, Integer> {
     @Transactional
     @Query(value = "DELETE FROM items WHERE id = ?",nativeQuery = true)
     int delete( int id);
+
+    Items findItemsById(int id);
 }

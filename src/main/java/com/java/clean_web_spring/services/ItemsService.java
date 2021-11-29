@@ -12,9 +12,11 @@ public interface ItemsService {
 
     List<Items> findAll();
 
-    Items save(Items items);
-
     int update(String name, int ct_id , int cost, int id);
 
     int delete(int id);
+
+    Items save(Items items);
+
+    Items findItemsById(int id);
 }

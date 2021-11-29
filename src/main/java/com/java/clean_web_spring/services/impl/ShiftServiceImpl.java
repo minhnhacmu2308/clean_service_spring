@@ -29,4 +29,12 @@ public class ShiftServiceImpl implements ShiftService {
         return shiftRepository.update(cost,id);
     }
 
+    public List<Shift> getAll() {
+        return shiftRepository.findAll();
+    }
+
+    @Override
+    public Shift findShiftById(int id) {
+        return shiftRepository.findShiftById(id);
+    }
 }

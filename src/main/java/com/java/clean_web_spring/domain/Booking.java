@@ -50,4 +50,13 @@ public class Booking {
 
     @Column(name = "full_name")
     private String fullName;
+
+    @Column(name = "message")
+    private String message;
+
+    @Column(name = "start_date")
+    private String startDate;
+
+    @Column(name = "status")
+    private int status;
 }

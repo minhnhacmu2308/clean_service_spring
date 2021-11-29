@@ -1,10 +1,197 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="public/fragments :: html_head">
+
 </head>
-<body>
+<body id="top">
+
+<div id="overlayer"></div>
+<div class="loader">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div th:if="${success}" class="toast" id="toast" data-delay="2500" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+    <div class="toast-header" style="background-color: #1c7430">
+        <strong class="mr-auto" style="color: white">Notice</strong>
+        <small style="color: white">Just now</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true" style="color: white">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body" >
+        <p th:text="'✅ ' +${success}"></p>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#toast').toast('show');
+        });
+    </script>
+</div>
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+
+    <!-- NAVBAR -->
+    <header th:replace="public/fragments :: header_menu" class="site-navbar mt-3">
+
+    </header>
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold">Detail Booking</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="/">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="/service/">Booking</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Detail Booking</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="mb-5">
+                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Service Description</h3>
+                        <span th:text="${categoryItems.description}"></span>
+                    </div>
+                    <!--  comment-list -->
+                    <div class="pt-5">
+
+                        <div class="comment-form-wrap pt-5">
+                            <h3 class="mb-5">Accompanied service</h3>
+                            <form th:action="${'/booking/add/'}+${categoryItems.id}" method="post" class="">
+                                <div class="form-group">
+                                    <label for="items">Choose shift*</label>
+                                    <select th:onchange="'getSum(' +${categoryItems.id}+ ')'"  class="form-control" name="shift" id="idShift"  aria-label="Default select example" required>
+                                        <option value="" >Choose shift</option>
+                                        <th:block  th:each="item : ${shiftList}">
+                                            <option th:value="${item.id}" th:text="${item.name}+${' - '}+${item.price}+${' VND'}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                                <th:block th:if="${itemsList.size() > 0}">
+                                    <div class="form-group">
+                                        <label for="items">Choose more services *</label>
+                                        <select  th:onchange="'getSum(' +${categoryItems.id}+ ')'" multiple class="form-control" name="items[]" th:id="${'items'}+${categoryItems.id}" aria-label="Default select example" required>
+                                            <th:block  th:each="item : ${itemsList}">
+                                                <option  th:value="${item.id}" th:text="${item.name}+${' - '}+${item.price}+${' VND'}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                </th:block>
+
+                                <th:block th:unless="${itemsList.size() > 0}">
+                                    <input type="hidden" name="items[]" value="">
+                                </th:block>
+
+                                <div class="form-group">
+                                    <label for="fullName">Full name *</label>
+                                    <input required type="text" th:value="${session.user.fullName}" name="fullName" class="form-control" id="fullName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address *</label>
+                                    <input required type="text" th:value="${session.user.address}" name="address" class="form-control" id="address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phoneNumber">Phone number</label>
+                                    <input required type="text" th:value="${session.user.phoneNumber}" name="phoneNumber" class="form-control" id="phoneNumber">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input required type="email" th:value="${session.user.email}" name="email" class="form-control" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="startDate">Start date</label>
+                                    <input required type="date"  class="form-control" name="startDate" id="startDate">
+                                    <input name="categoryItemsId" th:value="${categoryItems.id}" type="hidden">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message"  id="message" cols="30"  rows="10" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Submit" class="btn btn-primary btn-md">
+                                </div>
+
+                            </form>
+                        </div>
+                        <!-- Form comment -->
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-light p-3 border rounded mb-4">
+                        <h3 class="text-primary  mt-3 h5 pl-3 mb-3 " th:text="${categoryItems.name}"></h3>
+                        <ul class="list-unstyled pl-3 mb-0">
+                            <li class="mb-2"><strong class="text-black">Price:</strong> <span th:text="${categoryItems.price} + ' VNĐ'"></span></li>
+                            <li class="mb-2"><strong class="text-black">Total :</strong> <span id="sum" th:text="${categoryItems.price} + ' VNĐ'"></span></li>
+
+                        </ul>
+                    </div>
+
+<!--                    <div class="bg-light p-3 border rounded">-->
+<!--                        <a href="#" class="btn btn-block btn-primary btn-md">Submit</a>-->
+<!--                    </div>-->
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function onChangeShift(id) {
+            var nameIDMenu = "items" + id;
+            document.getElementById(nameIDMenu).disabled  = false;
+        }
+
+        function getSum(idCategoryItems){
+            var nameIDItems = "#items" + idCategoryItems;
+            var idItems = $(nameIDItems).val();
+            var idShift = $('#idShift').val();
+            $.ajax({
+                url: "/booking/get-sum",
+                type:"get",
+                data:{
+                    idItems:JSON.stringify(idItems),
+                    idCategoryItems: idCategoryItems,
+                    idShift:idShift
+                },
+                success: function(data){
+                    console.log(data);
+                    var row = document.getElementById("sum");
+                    var html = ""
+                    html+=data + "VNĐ";
+                    $('#sum').val(data);
+                    row.innerHTML = html;
+                }
+            });
+        }
+        function booking(){
+
+        }
+
+    </script>
+    <footer th:replace="public/fragments :: footer" class="site-footer">
+
+    </footer>
+
+</div>
 
 </body>
 </html>
