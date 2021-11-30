@@ -38,7 +38,7 @@
                             aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form th:action="@{/admin/category-add}" method="post">
+                    <form th:action="@{/admin/category-add}" method="post" enctype="multipart/form-data">
 
                       <div class="">
                         <label for="addname"
@@ -51,6 +51,12 @@
                                class="col-form-label">Giá tiền:</label>
                         <input type="text" class="form-control"
                                id="addcost" name="price" required>
+                      </div>
+                      <div class="">
+                        <label for="addcost"
+                               class="col-form-label">Chọn ảnh:</label>
+                        <input type="file" class="form-control"
+                               id="addcost" name="file" required>
                       </div>
                       <div class="">
                         <label for="editor" class="col-form-label">Mô tả:</label>
@@ -75,6 +81,7 @@
               <tr style="background-color: gray !important;">
                 <th>STT</th>
                 <th>Tên</th>
+                <th>Ảnh</th>
                 <th>Mô tả</th>
                 <th>Giá tiền</th>
                 <th>Hành động</th>
@@ -84,6 +91,7 @@
               <tr>
                 <th>STT</th>
                 <th>Tên</th>
+                <th>Ảnh</th>
                 <th>Mô tả</th>
                 <th>Giá tiền</th>
                 <th>Hành động</th>
@@ -95,6 +103,9 @@
                 <tr>
                   <td th:text="${category.id}"></td>
                   <td th:text="${category.name}"></td>
+                  <td>
+                    <img height="200px" width="200px" th:if="${category.image}" th:src="${'/resources/uploads/'}+${category.image}">
+                  </td>
                   <td th:utext="${category.description}"></td>
                   <td th:text="${category.price} + ' VNĐ '"></td>
                   <td>
@@ -165,6 +176,12 @@
                                    class="col-form-label">Giá tiền:</label>
                             <input type="text" class="form-control"
                                    id="cost" name="price" th:value="${category.price}">
+                          </div>
+                          <div class="">
+                            <label for="addcost"
+                                   class="col-form-label">Chọn ảnh:</label>
+                            <input type="file" class="form-control"
+                                   id="addcost" name="file" >
                           </div>
                           <div class="">
                             <label for="editor" class="col-form-label">Mô tả:</label>

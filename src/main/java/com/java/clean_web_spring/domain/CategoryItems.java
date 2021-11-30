@@ -27,6 +27,9 @@ public class CategoryItems {
     @Column(name = "price")
     private int price;
 
+    @Column(name = "image")
+    private String image;
+
     @OneToMany(mappedBy = "categoryItems")
     private List<Booking> bookings;
 

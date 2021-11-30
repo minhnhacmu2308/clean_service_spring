@@ -23,8 +23,8 @@ public interface CategoryItemsRepository extends PagingAndSortingRepository<Cate
 
     @Modifying
     @Transactional
-    @Query(value = "Update category_items SET name = ?, description = ? , price = ? WHERE id = ?",nativeQuery = true)
-    int update(String name, String desciption , int cost, int id);
+    @Query(value = "Update category_items SET name = ?, description = ? , price = ?,image = ? WHERE id = ?",nativeQuery = true)
+    int update(String name, String desciption , int cost, String image, int id);
 
     @Modifying
     @Transactional

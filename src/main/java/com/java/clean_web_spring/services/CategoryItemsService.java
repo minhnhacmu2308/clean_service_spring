@@ -19,7 +19,7 @@ public interface CategoryItemsService {
 
     CategoryItems save(CategoryItems categoryItems);
 
-    int update(String name, String desciption , int cost, int id);
+    int update(String name, String desciption , int cost, String image,int id);
 
     int delete(int id);
 }

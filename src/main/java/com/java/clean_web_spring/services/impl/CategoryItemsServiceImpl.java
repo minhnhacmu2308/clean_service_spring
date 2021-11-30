@@ -39,8 +39,8 @@ public class CategoryItemsServiceImpl implements CategoryItemsService {
     }
 
     @Override
-    public int update(String name, String desciption , int cost, int id) {
-        return categoryItemsRepository.update(name,desciption,cost,id);
+    public int update(String name, String desciption , int cost,String image, int id) {
+        return categoryItemsRepository.update(name,desciption,cost,image,id);
     }
 
     @Override
