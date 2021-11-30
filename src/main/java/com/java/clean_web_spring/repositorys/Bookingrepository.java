@@ -1,6 +1,7 @@
 package com.java.clean_web_spring.repositorys;
 
 import com.java.clean_web_spring.domain.Booking;
+import com.java.clean_web_spring.domain.CategoryItems;
 import com.java.clean_web_spring.domain.Review;
 import com.java.clean_web_spring.domain.User;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,4 +20,6 @@ public interface Bookingrepository extends PagingAndSortingRepository<Booking, I
     @Transactional
     @Query(value = "Update booking SET status = ? WHERE id = ?",nativeQuery = true)
     int update(int status, int id);
+
+    List<Booking> findBookingByCategoryItems(CategoryItems categoryItems);
 }

@@ -1,7 +1,9 @@
 package com.java.clean_web_spring.controllers.admin;
 
+import com.java.clean_web_spring.domain.BookingItems;
 import com.java.clean_web_spring.domain.CategoryItems;
 import com.java.clean_web_spring.domain.Items;
+import com.java.clean_web_spring.services.impl.BookingItemsServiceImpl;
 import com.java.clean_web_spring.services.impl.CategoryItemsServiceImpl;
 import com.java.clean_web_spring.services.impl.ItemsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AdminItemController {
 
     @Autowired
     CategoryItemsServiceImpl categoryItemsService;
+
+    @Autowired
+    BookingItemsServiceImpl bookingItemsService;
 
     @GetMapping({ "/item"})
     public ModelAndView index(String msg)
@@ -69,8 +74,15 @@ public class AdminItemController {
         ModelAndView mv = new ModelAndView("redirect:item");
         String id = request.getParameter("id");
         int idc = Integer.parseInt(id);
-        itemsService.delete(idc);
-        mv.addObject("msg","success");
+        Items items = itemsService.findItemsById(idc);
+        List<BookingItems> listB = bookingItemsService.findBookingItemsByItems(items);
+        if(listB.size() > 0){
+            mv.addObject("msg","error");
+        }
+        else {
+            itemsService.delete(idc);
+            mv.addObject("msg","success");
+        }
         return mv;
     }
 }

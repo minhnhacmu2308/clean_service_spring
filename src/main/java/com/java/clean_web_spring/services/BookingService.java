@@ -1,6 +1,7 @@
 package com.java.clean_web_spring.services;
 
 import com.java.clean_web_spring.domain.Booking;
+import com.java.clean_web_spring.domain.CategoryItems;
 import com.java.clean_web_spring.domain.Review;
 import com.java.clean_web_spring.domain.User;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,6 @@ public interface BookingService {
     List<Booking> findAll();
 
     int update(int status, int id);
+
+    List<Booking> findBookingByCategoryItems(CategoryItems categoryItems);
 }

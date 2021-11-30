@@ -20,8 +20,11 @@
         <h1 class="mt-4">Danh sách các dịch vụ đi kèm</h1>
         <div class="card mb-4">
           <div class="card-header">
-            <div th:if="${msg}" class="alert alert-success">
+            <div th:if="${msg == 'success'}" class="alert alert-success">
               <strong>Thành công!</strong>
+            </div>
+            <div th:if="${msg == 'error'}" class="alert alert-danger">
+              <strong>Dịch vụ đã có khách hàng Booking. Không thể xóa !</strong>
             </div>
             <button type="button" class="btn btn-success" data-bs-toggle="modal"
                     data-bs-target="#exampleModalAdd">
