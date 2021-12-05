@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div th:if="${success}" class="toast" id="toast" data-delay="2500" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
+<div th:if="${success}" class="toast" id="toast" data-delay="1000" style="position:fixed;top: 100PX; right: 10PX;z-index: 2000;width: 300px">
     <div class="toast-header" style="background-color: #1c7430">
         <strong class="mr-auto" style="color: white">Notice</strong>
         <small style="color: white">Just now</small>
@@ -102,26 +102,31 @@
                                 </th:block>
 
                                 <div class="form-group">
+                                    <label for="fullName">Size (100000 VNĐ * km2)*</label>
+                                    <input required type="number" th:onchange="'getSum(' +${categoryItems.id}+ ')'"  name="houseSize" class="form-control" id="houseSize">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="fullName">Full name *</label>
-                                    <input required type="text" th:value="${session.user.fullName}" name="fullName" class="form-control" id="fullName">
+                                    <input required type="text" th:value="${session.user != null ? session.user.fullName : null}" name="fullName" class="form-control" id="fullName">
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address *</label>
-                                    <input required type="text" th:value="${session.user.address}" name="address" class="form-control" id="address">
+                                    <input required type="text" th:value="${session.user != null ? session.user.address : null}" name="address" class="form-control" id="address">
                                 </div>
                                 <div class="form-group">
                                     <label for="phoneNumber">Phone number</label>
-                                    <input required type="text" th:value="${session.user.phoneNumber}" name="phoneNumber" class="form-control" id="phoneNumber">
+                                    <input required type="text" th:value="${session.user != null ? session.user.phoneNumber : null}" name="phoneNumber" class="form-control" id="phoneNumber">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input required type="email" th:value="${session.user.email}" name="email" class="form-control" id="email">
+                                    <input required type="email" th:value="${session.user != null ? session.user.email : null}" name="email" class="form-control" id="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="startDate">Start date</label>
                                     <input required type="date"  class="form-control" name="startDate" id="startDate">
-                                    <input name="categoryItemsId" th:value="${categoryItems.id}" type="hidden">
+                                    <input name="categoryItemsId" th:value="${categoryItems.id }" type="hidden">
                                 </div>
                                 <div class="form-group">
                                     <label for="message">Message</label>
@@ -164,13 +169,16 @@
             var nameIDItems = "#items" + idCategoryItems;
             var idItems = $(nameIDItems).val();
             var idShift = $('#idShift').val();
+            var size = $('#houseSize').val();
+
             $.ajax({
                 url: "/booking/get-sum",
                 type:"get",
                 data:{
                     idItems:JSON.stringify(idItems),
                     idCategoryItems: idCategoryItems,
-                    idShift:idShift
+                    idShift:idShift,
+                    size:size
                 },
                 success: function(data){
                     console.log(data);

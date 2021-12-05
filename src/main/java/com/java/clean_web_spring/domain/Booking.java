@@ -23,6 +23,10 @@ public class Booking {
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "employee_id",referencedColumnName = "id")
+    private User employee;
+
+    @ManyToOne
     @JoinColumn(name = "shift_id",referencedColumnName = "id")
     private Shift shift;
 
@@ -53,6 +57,9 @@ public class Booking {
 
     @Column(name = "message")
     private String message;
+
+    @Column(name = "house_size")
+    private String houseSize;
 
     @Column(name = "start_date")
     private String startDate;
