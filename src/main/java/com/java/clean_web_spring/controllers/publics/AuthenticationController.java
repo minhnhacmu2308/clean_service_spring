@@ -1,6 +1,7 @@
 package com.java.clean_web_spring.controllers.publics;
 
 import com.java.clean_web_spring.Constants.CommonConstants;
+import com.java.clean_web_spring.domain.Role;
 import com.java.clean_web_spring.domain.User;
 import com.java.clean_web_spring.services.UserService;
 import com.java.clean_web_spring.utils.EncrytedPasswordUtils;
@@ -39,7 +40,7 @@ public class AuthenticationController {
     public ModelAndView register(@ModelAttribute("user") User user,
                                  @RequestParam("rePassword") String rePassword) {
         ModelAndView mv = new ModelAndView("public/login");
-
+        Role role = userService.findRoleById(1);
         if (!user.getPassword().equalsIgnoreCase(rePassword)) {
             mv.addObject(CommonConstants.MSG_REGISTER_ERROR, messageSource.getMessage("password_and_repassword", null, Locale.getDefault()));
         } else {
@@ -49,6 +50,7 @@ public class AuthenticationController {
             if (!Objects.isNull(checkExistEmail)) {
                 mv.addObject(CommonConstants.MSG_REGISTER_ERROR, messageSource.getMessage("email_exited", null, Locale.getDefault()));
             } else {
+                user.setRole(role);
                 user.setStatus(1);
                 User userSave = userService.save(user);
                 mv.addObject(CommonConstants.MSG_REGISTER_SUCCESS, messageSource.getMessage("register_success", null, Locale.getDefault()));

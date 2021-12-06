@@ -123,8 +123,8 @@
                               <label for="category-film"
                                      class="col-form-label" style="font-weight:bold;"> Danh sách dịch vụ đi kèm </label>
                               <strong>:</strong><br>
-                              <th:block th:each="categorys : ${category.categoryItems.itemsList}">
-                                <span th:text="${categorys.name}"></span><br>
+                              <th:block th:each="categorys : ${category.bookingItemss}">
+                                <span th:text="${categorys.items.name}"></span><br>
                               </th:block>
                             </div>
                           </div>

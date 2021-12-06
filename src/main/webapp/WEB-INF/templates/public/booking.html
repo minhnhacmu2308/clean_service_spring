@@ -89,7 +89,8 @@
                                 <th:block th:if="${itemsList.size() > 0}">
                                     <div class="form-group">
                                         <label for="items">Choose more services *</label>
-                                        <select  th:onchange="'getSum(' +${categoryItems.id}+ ')'" multiple class="form-control" name="items[]" th:id="${'items'}+${categoryItems.id}" aria-label="Default select example" required>
+                                        <select  th:onchange="'getSum(' +${categoryItems.id}+ ')'" multiple class="form-control" name="items[]" th:id="${'items'}+${categoryItems.id}" aria-label="Default select example" >
+                                            <option selected value=""></option>
                                             <th:block  th:each="item : ${itemsList}">
                                                 <option  th:value="${item.id}" th:text="${item.name}+${' - '}+${item.price}+${' VND'}"></option>
                                             </th:block>
