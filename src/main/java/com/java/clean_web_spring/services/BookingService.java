@@ -21,5 +21,9 @@ public interface BookingService {
 
     int update(int status, int id);
 
+    int accpect(int nhanvien, int id);
+
     List<Booking> findBookingByCategoryItems(CategoryItems categoryItems);
+
+    List<Booking> getBookingEmp(int id);
 }

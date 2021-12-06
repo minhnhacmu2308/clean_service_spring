@@ -41,4 +41,15 @@ public class AdminBookingController {
 
         return mv;
     }
+    @PostMapping(value = "/booking-accpect")
+    public ModelAndView accpect(HttpServletRequest request){
+        ModelAndView mv = new ModelAndView("redirect:booking");
+        int nhanvien = Integer.parseInt(request.getParameter("nhanvien"));
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        bookingService.accpect(nhanvien,id);
+        mv.addObject("msg","success");
+
+        return mv;
+    }
 }

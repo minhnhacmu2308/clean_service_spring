@@ -24,7 +24,7 @@ public class AdminUserController {
     @GetMapping({ "/user"})
     public ModelAndView index(String msg)
     {
-        List<User> list = userService.getAll();
+        List<User> list = userService.listCustomer();
         ModelAndView mv = new ModelAndView("admin/user");
         mv.addObject("msg",msg);
         mv.addObject("list",list);

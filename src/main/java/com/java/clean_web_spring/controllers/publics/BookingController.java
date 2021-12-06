@@ -75,7 +75,7 @@ public class BookingController {
         if(size == ""){
             costSize = 0;
         } else {
-            costSize = Integer.parseInt(size) * 1000000;
+            costSize = Integer.parseInt(size) * 100000;
         }
         if (idItems != null){
             arrIdItems = StringUtils.convertStringArray(idItems);
@@ -130,11 +130,11 @@ public class BookingController {
                     items = itemsService.findItemsById(Integer.parseInt(arrId.get(i)));
                     sumItems += items.getPrice();
                 }
-                amount += sumItems + categoryItems.getPrice() + booking.getShift().getPrice();
+                amount += sumItems + categoryItems.getPrice() + booking.getShift().getPrice() + Integer.parseInt(booking.getHouseSize()) * 100000;
             } else {
-                amount += categoryItems.getPrice() + booking.getShift().getPrice();
+                amount += categoryItems.getPrice() + booking.getShift().getPrice() + Integer.parseInt(booking.getHouseSize()) * 100000;
             }
-            System.out.println(amount);
+//            System.out.println(amount);
             booking.setAmount(amount);
             booking.setCreatedAt(java.time.LocalDate.now().toString());
             booking.setStatus(0);

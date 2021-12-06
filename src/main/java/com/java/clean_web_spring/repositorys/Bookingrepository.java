@@ -21,5 +21,13 @@ public interface Bookingrepository extends PagingAndSortingRepository<Booking, I
     @Query(value = "Update booking SET status = ? WHERE id = ?",nativeQuery = true)
     int update(int status, int id);
 
+    @Modifying
+    @Transactional
+    @Query(value = "Update booking SET employee_id = ? WHERE id = ?",nativeQuery = true)
+    int accpect(int nhanvien, int id);
+
     List<Booking> findBookingByCategoryItems(CategoryItems categoryItems);
+
+    @Query(value = "SELECT * from  booking  WHERE employee_id = ? ",nativeQuery = true)
+    List<Booking> getBookingEmp(int id);
 }

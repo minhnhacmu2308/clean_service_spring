@@ -43,7 +43,17 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public int accpect(int nhanvien, int id) {
+        return bookingrepository.accpect(nhanvien,id);
+    }
+
+    @Override
     public List<Booking> findBookingByCategoryItems(CategoryItems categoryItems) {
         return bookingrepository.findBookingByCategoryItems(categoryItems);
+    }
+
+    @Override
+    public List<Booking> getBookingEmp(int id) {
+        return bookingrepository.getBookingEmp(id);
     }
 }

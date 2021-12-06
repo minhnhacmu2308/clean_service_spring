@@ -23,7 +23,7 @@
 <body class="sb-nav-fixed">
     <nav th:fragment="html_nav" class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="/home">MANAGE SERVICE</a>
+    <a class="navbar-brand ps-3" href="/admin/">MANAGE SERVICE</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
             class="fas fa-bars"></i></button>
@@ -56,19 +56,19 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Bảng điều khiển
                     </a>
-                    <a class="nav-link" href="/admin/category">
+                    <a class="nav-link" th:if="${session.admin.role.id == 3}" href="/admin/category">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Quản lý dịch vụ
                     </a>
-                    <a class="nav-link" href="/admin/item">
+                    <a class="nav-link" th:if="${session.admin.role.id == 3}" href="/admin/item">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Dịch vụ đi kèm
                     </a>
-                    <a class="nav-link" href="/admin/shift">
+                    <a class="nav-link" th:if="${session.admin.role.id == 3}" href="/admin/shift">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Thời gian
                     </a>
-                    <a class="nav-link" href="/admin/user">
+                    <a class="nav-link" th:if="${session.admin.role.id == 3}" href="/admin/user">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Quản lý khách hàng
                     </a>
@@ -76,9 +76,13 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Quản lý Booking
                     </a>
-                    <a class="nav-link" href="/admin/review">
+                    <a class="nav-link" th:if="${session.admin.role.id == 3}" href="/admin/review">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Review khách hàng
+                    </a>
+                    <a class="nav-link" th:if="${session.admin.role.id == 3}" href="/admin/employee">
+                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                        Quản lý nhân viên
                     </a>
                 </div>
             </div>

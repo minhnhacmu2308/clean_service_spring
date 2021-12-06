@@ -29,7 +29,7 @@ Quản lý Review khách hàng
 ----
 Thêm ảnh ở dịch vụ
 --------- 10/12-------------
-Thêm quản lý nhân viên : thêm sửa xóa 
-Nhân viên : đăng nhập, danh sách booking, có nút nhận
-Check Booking cho khách vãng lai tham khảo
-Diện tích nhà ở booking
+Thêm quản lý nhân viên : thêm sửa xóa : done
+Nhân viên : đăng nhập, danh sách booking, có nút nhận : done
+Check Booking cho khách vãng lai tham khảo : done
+Diện tích nhà ở booking : done
