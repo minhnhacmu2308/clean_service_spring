@@ -16,4 +16,6 @@ public interface UserService {
     User checkLogin(String email,String password);
 
     User getUserById(int id);
+
+    User checkLoginAdmin(String email,String password);
 }

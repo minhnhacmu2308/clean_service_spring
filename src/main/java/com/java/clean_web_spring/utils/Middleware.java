@@ -19,4 +19,14 @@ public class Middleware {
             return false;
         }
     }
+
+    public  static boolean middlewareAdmin( HttpServletRequest request){;
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(CommonConstants.SESSION_ADMIN);
+        if (Objects.nonNull(user)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

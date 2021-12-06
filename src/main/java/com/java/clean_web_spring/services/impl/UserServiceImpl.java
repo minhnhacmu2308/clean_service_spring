@@ -66,4 +66,9 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public User checkLoginAdmin(String email, String password) {
+        return userRepository.checkLoginAdmin(email,password);
+    }
 }

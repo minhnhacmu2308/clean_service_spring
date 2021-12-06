@@ -28,6 +28,8 @@ public class CommonConstants {
      */
     public static final String SESSION_USER = "user";
 
+    public static final String SESSION_ADMIN = "admin";
+
     public static final String MY_EMAIL = "websitedoan@gmail.com";
 
     // Replace password!!

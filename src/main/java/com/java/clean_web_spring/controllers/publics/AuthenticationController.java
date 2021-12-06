@@ -49,6 +49,7 @@ public class AuthenticationController {
             if (!Objects.isNull(checkExistEmail)) {
                 mv.addObject(CommonConstants.MSG_REGISTER_ERROR, messageSource.getMessage("email_exited", null, Locale.getDefault()));
             } else {
+                user.setStatus(1);
                 User userSave = userService.save(user);
                 mv.addObject(CommonConstants.MSG_REGISTER_SUCCESS, messageSource.getMessage("register_success", null, Locale.getDefault()));
             }
@@ -77,7 +78,7 @@ public class AuthenticationController {
     public ModelAndView getLogout(HttpServletRequest request){
         ModelAndView mv = new ModelAndView("redirect:/");
         HttpSession session = request.getSession(false);
-        session.invalidate();
+        session.removeAttribute("user");
         return mv;
     }
 }
