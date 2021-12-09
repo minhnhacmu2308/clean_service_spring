@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 30, 2021 lúc 08:04 AM
+-- Thời gian đã tạo: Th12 09, 2021 lúc 09:22 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.2.31
 
@@ -40,17 +40,10 @@ CREATE TABLE `booking` (
   `phone_number` varchar(255) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
   `start_date` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+  `status` int(11) DEFAULT NULL,
+  `house_size` varchar(255) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `booking`
---
-
-INSERT INTO `booking` (`id`, `amount`, `created`, `ct_items_id`, `shift_id`, `user_id`, `address`, `email`, `full_name`, `phone_number`, `message`, `start_date`, `status`) VALUES
-(1, 450000, '2021-11-29', 7, 3, 1, 'Hà Nội', 'minhnha2308@gmail.com', 'Nguyễn Minh Nhã', '0379572434', 'Tới sớm giúp mình', '2021-11-30', 1),
-(2, 400000, '2021-11-29', 7, 1, 1, 'Hà Nội', 'minhnha2308@gmail.com', 'Nguyễn Minh Nhã', '0379572434', 'ok', '2021-11-29', 0),
-(3, 450000, '2021-11-29', 7, 1, 3, 'Hà Nội', 'minhhuy@gmail.com', 'Minh Huy', '0394073456', 'Khi nào tới hãy liên lạc qua sdt cho tôi', '2021-11-30', 1);
 
 -- --------------------------------------------------------
 
@@ -63,16 +56,6 @@ CREATE TABLE `booking_items` (
   `booking_id` int(11) DEFAULT NULL,
   `items_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `booking_items`
---
-
-INSERT INTO `booking_items` (`id`, `booking_id`, `items_id`) VALUES
-(1, 1, 10),
-(2, 2, 10),
-(3, 3, 10),
-(4, 3, 12);
 
 -- --------------------------------------------------------
 
@@ -148,6 +131,26 @@ INSERT INTO `review` (`id`, `comment`, `ct_items_id`, `user_id`, `created`) VALU
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `role`
+--
+
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
+  `role_name` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `role`
+--
+
+INSERT INTO `role` (`id`, `role_name`) VALUES
+(1, 'Khách hàng'),
+(2, 'Nhân viên'),
+(3, 'Admin');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `shift`
 --
 
@@ -180,17 +183,20 @@ CREATE TABLE `user` (
   `password` varchar(128) NOT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `user_name` varchar(255) DEFAULT NULL
+  `user_name` varchar(255) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`id`, `address`, `email`, `full_name`, `password`, `phone_number`, `status`, `user_name`) VALUES
-(1, 'ádasd', 'minhnha2308@gmail.com', 'Nguyễn Minh Nhã', '25f9e794323b453885f5181f1b624d0b', '0379572434', 0, 'use'),
-(2, NULL, 'nguoidung@gmail.com', 'Người Dùng', 'a916938188dc916c35fba826dd78633b', NULL, 0, 'nguoidung'),
-(3, 'Hà Nội', 'minhhuy@gmail.com', 'Minh Huy', 'a95271e4a0bb9d05889d674834cc732f', '0394073512', 0, 'minhhuy');
+INSERT INTO `user` (`id`, `address`, `email`, `full_name`, `password`, `phone_number`, `status`, `user_name`, `role_id`) VALUES
+(1, 'ádasd', 'minhnha2308@gmail.com', 'Nguyễn Minh Nhã', '25f9e794323b453885f5181f1b624d0b', '0379572434', 0, 'use', 1),
+(2, NULL, 'nguoidung@gmail.com', 'Người Dùng', 'a916938188dc916c35fba826dd78633b', NULL, 0, 'nguoidung', 1),
+(3, 'Hà Nội', 'minhhuy@gmail.com', 'Minh Huy', '25f9e794323b453885f5181f1b624d0b', '0394073512', 0, 'minhhuy', 1),
+(4, 'Hà Nội', 'admin@gmail.com', 'Quản trị viên', '25f9e794323b453885f5181f1b624d0b', '0394073751', 1, 'admin', 3),
+(5, 'Hà Nội', 'nhanvien@gmail.com', 'Nhân viên', '25f9e794323b453885f5181f1b624d0b', '0394073725', 1, 'nhanvien', 2);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -203,7 +209,8 @@ ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FKhqwrv53d9q2ijay3ccw2wu3as` (`ct_items_id`),
   ADD KEY `FKo68uipbvb50hoffcx4mrkmjwg` (`shift_id`),
-  ADD KEY `FKkgseyy7t56x7lkjgu3wah5s3t` (`user_id`);
+  ADD KEY `FKkgseyy7t56x7lkjgu3wah5s3t` (`user_id`),
+  ADD KEY `FKn8ne879x0nwnn2uk9khsavonl` (`employee_id`);
 
 --
 -- Chỉ mục cho bảng `booking_items`
@@ -235,6 +242,12 @@ ALTER TABLE `review`
   ADD KEY `FKiyf57dy48lyiftdrf7y87rnxi` (`user_id`);
 
 --
+-- Chỉ mục cho bảng `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `shift`
 --
 ALTER TABLE `shift`
@@ -244,7 +257,8 @@ ALTER TABLE `shift`
 -- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKn82ha3ccdebhokx3a8fgdqeyy` (`role_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -254,13 +268,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `booking_items`
 --
 ALTER TABLE `booking_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `category_items`
@@ -281,6 +295,12 @@ ALTER TABLE `review`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT cho bảng `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT cho bảng `shift`
 --
 ALTER TABLE `shift`
@@ -290,7 +310,7 @@ ALTER TABLE `shift`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
